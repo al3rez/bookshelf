@@ -7,8 +7,8 @@ import lxml.html
 def get_authors_with_names_that_start_with(letter):
     URL = 'https://en.wikipedia.org/wiki/List_of_authors_by_name:_'
     response = requests.get(URL+letter.upper())
-    element_tree = lxml.html.fromstring(response.text)
-    authors = element_tree.xpath('//*[@id="mw-content-text"]/ul/li/a')
+    html_element = create_html_element_from(response)
+    authors = html_element.xpath('//*[@id="mw-content-text"]/ul/li/a')
     return [author.text for author in authors]
 
 
@@ -22,6 +22,11 @@ def search_for_books_by_author(name):
         'search[field]': 'on'
     }
     response = requests.get(URL, params=payload)
-    element_tree = lxml.html.fromstring(response.text)
-    books = element_tree.xpath('//*/a[@class="bookTitle"]')
+    html_element = create_html_element_from(response)
+    books = html_element.xpath('//*/a[@class="bookTitle"]')
     return [book.attrib['href'] for book in books]
+
+
+def create_html_element_from(response):
+    html_element = lxml.html.fromstring(response.text)
+    return html_element
