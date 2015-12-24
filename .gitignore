@@ -1,0 +1,32 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.log
+*.egg-info
+src/pip-*.txt
+dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Vim temporary files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+.netrwhist
+*~
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
